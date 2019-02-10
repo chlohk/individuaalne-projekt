@@ -1,0 +1,34 @@
+<html>
+<body>
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <h1>Tudeng: {{ message }}</h1>
+</div>
+<script src="https://unpkg.com/vue-resource"></script>
+<script>
+    Vue.use(VueResource);
+    var url = "http://localhost:8080/api";
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: "tundmatu"
+        },
+        methods: {
+            work: function(){
+                alert(url);
+                this.$http.get(url).then(function(response){
+                    alert(response.data);
+                    this.message = response.data.key;
+                }, function(error){
+                    alert(error.statusText);
+                });
+            }
+        },
+        mounted: function(){
+            this.work();
+        }
+    });
+</script>
+</body>
+</html>
